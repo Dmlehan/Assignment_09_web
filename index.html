@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KnightRider</title>
+  <style>
+    body{
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    #main_section{
+      margin-top: 25%;
+    }
+
+
+    button{
+      width: 100px;
+      height: 20px;
+      margin: 8px;
+      font-size: 12px;
+      border: 1px solid white;
+      border-radius: 5px;
+      color: white;
+    }
+
+    #start{
+      background-color: limegreen;
+      color: white;
+    }
+
+    #stop{
+      background-color: red;
+      color: white;
+    }
+
+    p{
+      text-align: center;
+      margin: 0;
+      color: red;
+      font-size: 18px;
+    }
+
+    #div_section{
+      display: flex;
+
+    }
+
+    hr{
+      margin: 5px;
+    }
+
+    div {
+      width: 50px;
+      height: 30px;
+      margin-left: 5px;
+    }
+
+
+  </style>
+</head>
+<body>
+<section id="main_section">
+
+  <p>JavaScript Knight Rider</p>
+  <hr>
+  <section id="div_section">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+  </section>
+  <hr>
+
+  <section>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+  </section>
+
+</section>
+ <script>
+   // var current_light=0;
+   // var current_direction="RIGHT";
+   // var light_count = 6;
+   // var key = null;
+   // const updateLightPanel=()=>{
+   //   $(".light").css("background","white");
+   //
+   //   if (current_direction==="RIGHT"){
+   //     current_light++;
+   //     $(".light").eq(current_light++).css("background","red");
+   //     if (current_light===light_count){
+   //       current_direction="LEFT";
+   //     }
+   //   }else{
+   //     current_light--;
+   //     $(".light").eq(current_light++).css("background","red");
+   //        if(current_light===0){
+   //          current_direction="RIGHT";
+   //        }
+   //   }
+   //
+   //
+   //   $('#start').on('click',()=>{
+   //     key=setInterval(updateLight,500);
+   //   });
+   //
+   //   $('#stop').on('click',()=>{
+   //     clearInterval(key);
+   //
+   //   });
+   //
+   // }
+   //
+   // setInterval(updateLightPanel,3000);
+
+
+   let lights = $('.light');
+   let index=0;
+   let direction = 'Right';
+
+   let key = null;
+   var audio = new Audio();
+
+   audio.src="assert/audio/Knight Rider Sms ! Knight Rider ! Theme.mp3";
+   audio.loop=true;
+
+   function updateLight(){
+     $('.light').css({background:"white"});
+
+     if(index>0){
+       lights[index-1].style.background="pink";
+     }
+
+     lights[index].style.background="red";
+
+     if(index<6){
+       lights[index+1].style.background="pink";
+     }
+
+     if(index===6){
+       direction="Left";
+     }
+
+     if(index===0){
+       direction="Right";
+     }
+
+     direction==="Right" ? index++ : index--;
+
+   }
+
+
+
+   $('#start').on('click',()=>{
+     key=setInterval(updateLight,500);
+     audio.play();
+   });
+
+   $('#stop').on('click',()=>{
+     clearInterval(key);
+     audio.pause();
+   });
+
+
+ </script>
+
+</body>
+</html>
